@@ -1,0 +1,130 @@
+class Auto {
+    private String policyHolderName;
+    private String carMake;
+    private String carModel;
+    private double liability;
+    private double collision;
+    private double commission;
+    
+    public Auto(String name, String make, String model, double liability, double collision) {
+        this.policyHolderName = name;
+        this.carMake = make;
+        this.carModel = model;
+        this.liability = liability;
+        this.collision = collision;
+    }
+    
+    public void computeCommission() {
+        commission = (liability + collision) * 0.10;
+    }
+    
+    public void printPolicy() {
+        System.out.println("Auto Policy");
+        System.out.println("Name: " + policyHolderName);
+        System.out.println("Make: " + carMake);
+        System.out.println("Model: " + carModel);
+        System.out.println("Liability: $" + liability);
+        System.out.println("Collision: $" + collision);
+        System.out.println("Commission: $" + commission);
+        System.out.println();
+    }
+}
+
+class Home {
+    private String policyHolderName;
+    private double dwelling;
+    private double contents;
+    private double liability;
+    private double commission;
+    
+    public void setPolicyHolderName(String name) {
+        this.policyHolderName = name;
+    }
+    public void setDwelling(double dwelling) {
+        this.dwelling = dwelling;
+    }
+    public void setContents(double contents) {
+        this.contents = contents;
+    }
+    public void setLiability(double liability) {
+        this.liability = liability;
+    }
+    
+    public void computeCommission() {
+        commission = (dwelling + contents + liability) * 0.20;
+    }
+    
+    public void printPolicy() {
+        System.out.println("Home Policy");
+        System.out.println("Name: " + policyHolderName);
+        System.out.println("Dwelling: $" + dwelling);
+        System.out.println("Contents: $" + contents);
+        System.out.println("Liability: $" + liability);
+        System.out.println("Commission: $" + commission);
+        System.out.println();
+    }
+}
+
+class Life {
+    private String policyHolderName;
+    private int age;
+    private double sumInsured;
+    private double commission;
+    
+    public Life(String name, int age, double sumInsured) {
+        this.policyHolderName = name;
+        this.age = age;
+        this.sumInsured = sumInsured;
+    }
+    
+    public void computeCommission() {
+        commission = sumInsured * 0.05;
+    }
+    
+    public void printPolicy() {
+        System.out.println("Life Policy");
+        System.out.println("Name: " + policyHolderName);
+        System.out.println("Age: " + age);
+        System.out.println("Sum Insured: $" + sumInsured);
+        System.out.println("Commission: $" + commission);
+        System.out.println();
+    }
+    
+    public String getPolicyHolderName() {
+        return policyHolderName;
+    }
+    public int getAge() {
+        return age;
+    }
+    public double getSumInsured() {
+        return sumInsured;
+    }
+}
+
+public class PolicyTest {
+    public static void main(String[] args) {
+        // Auto Policy
+        Auto auto = new Auto("Jerry Seinfeld", "Chevy", "Malibu", 10000, 5000);
+        auto.computeCommission();
+        auto.printPolicy();
+        
+        // Home Policy
+        Home home = new Home();
+        home.setPolicyHolderName("Elaine Benes");
+        home.setDwelling(50000);
+        home.setContents(20000);
+        home.setLiability(10000);
+        home.computeCommission();
+        home.printPolicy();
+        
+        // Life Policy
+        Life life = new Life("Cosmo Kramer", 35, 50000);
+        life.computeCommission();
+        life.printPolicy();
+        
+        // Testing Getters
+        System.out.println("Get life first name: " + life.getPolicyHolderName());
+        System.out.println("Get life age: " + life.getAge());
+        System.out.println("Get life sum: " + life.getSumInsured());
+    }
+}
