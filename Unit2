@@ -1,44 +1,44 @@
 class Auto {
-    private String policyHolderName;
-    private String carMake;
-    private String carModel;
+	private String firstName;
+	private String lastName;
+    private String make;
+    private String model;
     private double liability;
     private double collision;
     private double commission;
     
-    public Auto(String name, String make, String model, double liability, double collision) {
-        this.policyHolderName = name;
-        this.carMake = make;
-        this.carModel = model;
+    public Auto(String firstName, String lastName, String make, String model, double liability, double collision) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.make = make;
+        this.model = model;
         this.liability = liability;
         this.collision = collision;
     }
     
     public void computeCommission() {
-        commission = (liability + collision) * 0.10;
+        commission = (liability + collision) * 0.30;
     }
     
-    public void printPolicy() {
-        System.out.println("Auto Policy");
-        System.out.println("Name: " + policyHolderName);
-        System.out.println("Make: " + carMake);
-        System.out.println("Model: " + carModel);
-        System.out.println("Liability: $" + liability);
-        System.out.println("Collision: $" + collision);
-        System.out.println("Commission: $" + commission);
-        System.out.println();
+    public String toString() {
+    	return "Auto Policy\nName: " + firstName + " " + lastName + "\nMake: " + make + "\nModel: " + model + "\nLiability: " + liability + "\nCollision: " + collision + "\nCommission: " + commission;
     }
 }
 
 class Home {
-    private String policyHolderName;
+	private String firstName;
+	private String lastName;
     private double dwelling;
     private double contents;
+    private double footage;
     private double liability;
     private double commission;
     
-    public void setPolicyHolderName(String name) {
-        this.policyHolderName = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public void setLastName(String lastName) {
+    	this.lastName = lastName;
     }
     public void setDwelling(double dwelling) {
         this.dwelling = dwelling;
@@ -46,81 +46,138 @@ class Home {
     public void setContents(double contents) {
         this.contents = contents;
     }
+    public void setFootage(double footage) {
+    	this.footage = footage;
+    }
     public void setLiability(double liability) {
         this.liability = liability;
     }
     
     public void computeCommission() {
-        commission = (dwelling + contents + liability) * 0.20;
+        commission = (liability * 0.30) + ((dwelling + contents) * 0.20);
     }
     
-    public void printPolicy() {
-        System.out.println("Home Policy");
-        System.out.println("Name: " + policyHolderName);
-        System.out.println("Dwelling: $" + dwelling);
-        System.out.println("Contents: $" + contents);
-        System.out.println("Liability: $" + liability);
-        System.out.println("Commission: $" + commission);
-        System.out.println();
+    public String toString() {
+    	return "Home Policy\nName: " + firstName + " " + lastName + "\nFootage: " + footage + "\nDwelling: " + dwelling + "\nContents: " + contents + "\nLiability: " + liability + "\nCommission: " + commission;
     }
 }
 
 class Life {
-    private String policyHolderName;
+	private String firstName;
+	private String lastName;
     private int age;
-    private double sumInsured;
+    private double term;
     private double commission;
     
-    public Life(String name, int age, double sumInsured) {
-        this.policyHolderName = name;
+    public Life(String firstName, String lastName, int age, double term) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
-        this.sumInsured = sumInsured;
+        this.term = term;
     }
     
     public void computeCommission() {
-        commission = sumInsured * 0.05;
+        commission = term * 0.2;
     }
     
-    public void printPolicy() {
-        System.out.println("Life Policy");
-        System.out.println("Name: " + policyHolderName);
-        System.out.println("Age: " + age);
-        System.out.println("Sum Insured: $" + sumInsured);
-        System.out.println("Commission: $" + commission);
-        System.out.println();
+    public String toString() {
+    	return "Life Policy\nName: " + firstName + " " + lastName + "\nAge: " + age + "\nTerm: " + term + "\nCommission: " + commission;
     }
     
-    public String getPolicyHolderName() {
-        return policyHolderName;
+    public String getFirstName() {
+        return firstName;
+    }
+    public String getLastName() {
+        return lastName;
     }
     public int getAge() {
         return age;
     }
-    public double getSumInsured() {
-        return sumInsured;
+    public double getTerm() {
+        return term;
     }
 }
 
 public class PolicyTest {
-    public static void main(String[] args) {
-        Auto auto = new Auto("Jerry Seinfeld", "Chevy", "Malibu", 10000, 5000);
-        auto.computeCommission();
-        auto.printPolicy();
-        
-        Home home = new Home();
-        home.setPolicyHolderName("Elaine Benes");
-        home.setDwelling(50000);
-        home.setContents(20000);
-        home.setLiability(10000);
-        home.computeCommission();
-        home.printPolicy();
-        
-        Life life = new Life("Cosmo Kramer", 35, 50000);
-        life.computeCommission();
-        life.printPolicy();
-        
-        System.out.println("Get life first name: " + life.getPolicyHolderName());
-        System.out.println("Get life age: " + life.getAge());
-        System.out.println("Get life sum: " + life.getSumInsured());
-    }
+	 public static void main(String[] args)
+
+     {
+
+           // Create and set an Auto policy object setting data using constructor
+
+           Auto a = new Auto("Jerry", "Seinfed", "Chevy", "Malibu", 10000.0, 50000.0);
+
+          
+
+           // Compute commission
+
+           a.computeCommission();
+
+          
+
+           // Print auto policy
+
+           System.out.println(a);
+
+          
+
+           // Create and set a Home policy object setting data using setters
+
+           Home h = new Home();
+
+           h.setFirstName("Elaine");
+
+           h.setLastName("Benes");
+
+           h.setContents(5000);
+
+           h.setDwelling(32000);
+
+           h.setFootage(4000);
+
+           h.setLiability(10000);
+
+          
+
+           // Compute commission
+
+           h.computeCommission();
+
+
+
+           // Print home policy
+
+           System.out.println(h);
+
+          
+
+           // Create and set an Life policy object setting data using constructor
+
+           Life l = new Life("Cosmo", "Kramer", 35, 50000);
+
+          
+
+           // Compute commission
+
+           l.computeCommission();
+
+          
+
+           // Print life policy
+
+           System.out.println(l);
+
+          
+
+           // Test getters
+
+           System.out.println("Get life firstName: " + l.getFirstName());
+
+           System.out.println("Get life lastName: " + l.getLastName());
+
+           System.out.println("Get life age: " + l.getAge());
+
+           System.out.println("Get life term: " + l.getTerm());
+
+     }
 }
