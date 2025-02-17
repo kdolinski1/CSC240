@@ -103,12 +103,10 @@ class Life {
 
 public class PolicyTest {
     public static void main(String[] args) {
-        // Auto Policy
         Auto auto = new Auto("Jerry Seinfeld", "Chevy", "Malibu", 10000, 5000);
         auto.computeCommission();
         auto.printPolicy();
         
-        // Home Policy
         Home home = new Home();
         home.setPolicyHolderName("Elaine Benes");
         home.setDwelling(50000);
@@ -117,12 +115,10 @@ public class PolicyTest {
         home.computeCommission();
         home.printPolicy();
         
-        // Life Policy
         Life life = new Life("Cosmo Kramer", 35, 50000);
         life.computeCommission();
         life.printPolicy();
         
-        // Testing Getters
         System.out.println("Get life first name: " + life.getPolicyHolderName());
         System.out.println("Get life age: " + life.getAge());
         System.out.println("Get life sum: " + life.getSumInsured());
