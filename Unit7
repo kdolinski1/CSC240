@@ -1,0 +1,124 @@
+public class Student implements Comparable<Student> {
+    private String firstName;
+    private String lastName;
+    private int score;
+
+    public Student(String firstName, String lastName, int score) {
+        if (score < 0 || score > 100) {
+            throw new IllegalArgumentException("Score must be 0–100.");
+        }
+        this.firstName = firstName;
+        this.lastName  = lastName;
+        this.score     = score;
+    }
+
+    public String getFirstName() { return firstName; }
+    public String getLastName()  { return lastName;  }
+    public int    getScore()     { return score;     }
+
+    @Override
+    public int compareTo(Student other) {
+        return Integer.compare(this.score, other.score);
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName + " " + score;
+    }
+}
+
+
+public class Sorting
+{
+   public static void selectionSort (Comparable[] list)
+   {
+      int max;                      
+      Comparable temp;
+
+      for (int index = 0; index < list.length-1; index++)
+      {
+         max = index;
+         for (int scan = index+1; scan < list.length; scan++)
+            if (list[scan].compareTo(list[max]) > 0)
+               max = scan;
+
+         temp        = list[max];
+         list[max]   = list[index];
+         list[index] = temp;
+      }
+   }
+
+   public static void insertionSort (Comparable[] list)
+   {
+      for (int index = 1; index < list.length; index++)
+      {
+         Comparable key      = list[index];
+         int        position = index;
+
+         while (position > 0 &&
+                key.compareTo(list[position-1]) > 0)
+         {
+            list[position] = list[position-1];
+            position--;
+         }
+
+         list[position] = key;
+      }
+   }
+}
+
+
+
+import java.util.Arrays;
+
+public class Gradebook {
+    private Student[] students;
+    private int       count;
+
+    public Gradebook(int capacity) {
+        students = new Student[capacity];
+        count    = 0;
+    }
+
+    public void addStudent(Student s) {
+        if (count >= students.length) {
+            throw new IllegalStateException("Gradebook is full.");
+        }
+        students[count++] = s;
+    }
+
+    public void sortStudents() {
+        Student[] toSort = Arrays.copyOf(students, count);
+        Sorting.selectionSort(toSort);
+        System.arraycopy(toSort, 0, students, 0, count);
+    }
+
+    public void printStudents() {
+        for (int i = 0; i < count; i++) {
+            System.out.println(students[i]);
+        }
+    }
+}
+
+
+import java.util.Scanner;
+
+public class Driver {
+    public static void main(String[] args) {
+        Scanner   scanner   = new Scanner(System.in);
+        Gradebook gradebook = new Gradebook(5);
+
+        for (int i = 0; i < 5; i++) {
+            System.out.print("Enter student <firstName> <lastName> <score>: ");
+            String first = scanner.next();
+            String last  = scanner.next();
+            int    score = scanner.nextInt();
+
+            gradebook.addStudent(new Student(first, last, score));
+        }
+
+        gradebook.sortStudents();
+        gradebook.printStudents();
+        scanner.close();
+    }
+}
