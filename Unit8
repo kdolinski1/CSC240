@@ -1,0 +1,72 @@
+public class Money {
+    private int tens;
+    private int fives;
+    private int ones;
+    private int quarters;
+    private int dimes;
+    private int nickels;
+    private int pennies;
+    private int cents;
+
+    public Money(double amount) {
+        this.cents = (int) Math.round(amount * 100);
+    }
+
+    public void calculate() {
+        tens = cents / 1000;
+        cents %= 1000;
+        
+        fives = cents / 500;
+        cents %= 500;
+        
+        ones = cents / 100;
+        cents %= 100;
+        
+        quarters = cents / 25;
+        cents %= 25;
+        
+        dimes = cents / 10;
+        cents %= 10;
+        
+        nickels = cents / 5;
+        cents %= 5;
+        
+        pennies = cents;
+    }
+
+    public void printMoney() {
+        System.out.println(tens + " ten dollar bills");
+        System.out.println(fives + " five dollar bills");
+        System.out.println(ones + " one dollar bills");
+        System.out.println(quarters + " quarters");
+        System.out.println(dimes + " dimes");
+        System.out.println(nickels + " nickels");
+        System.out.println(pennies + " pennies");
+    }
+}
+
+
+import java.util.Scanner;
+
+public class Driver {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print("Enter a monetary value or quit: ");
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("quit")) {
+                break;
+            }
+            try {
+                double amount = Double.parseDouble(input);
+                Money mon = new Money(amount);
+                mon.calculate();
+                mon.printMoney();
+                System.out.println();
+            } catch (NumberFormatException e) {
+                System.out.println("EXCEPTION: Invalid input");
+            }
+        }
+        scanner.close();
+    }
+}
