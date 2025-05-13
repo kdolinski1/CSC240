@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+public class Driver {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter positive integer as numerator: ");
+        int numerator = readPositiveInt(scanner);
+        
+        System.out.print("Enter positive integer as denominator: ");
+        int denominator = readPositiveInt(scanner);
+        
+        RationalNumber rational = new RationalNumber(numerator, denominator);
+        int gcdValue = rational.gcd();
+        
+        System.out.printf("Greatest common denominator of %d/%d is %d%n", numerator, denominator, gcdValue);
+        
+        scanner.close();
+    }
+    
+    private static int readPositiveInt(Scanner scanner) {
+        int value;
+        while (true) {
+            if (!scanner.hasNextInt()) {
+                System.out.print("Please enter a positive integer: ");
+                scanner.next();
+                continue;
+            }
+            value = scanner.nextInt();
+            if (value > 0) {
+                break;
+            } else {
+                System.out.print("Please enter a positive integer: ");
+            }
+        }
+        return value;
+    }
+}
+
+
+
+
+class RationalNumber {
+    private int numerator;
+    private int denominator;
+
+    public RationalNumber(int numerator, int denominator) {
+        this.numerator = numerator;
+        this.denominator = denominator;
+    }
+
+    public int gcd() {
+        return gcdRecursive(numerator, denominator);
+    }
+
+    private int gcdRecursive(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcdRecursive(b, a % b);
+    }
+}
